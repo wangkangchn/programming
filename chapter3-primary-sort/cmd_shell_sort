@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make shell_sort
+sudo ./app_shell_sort

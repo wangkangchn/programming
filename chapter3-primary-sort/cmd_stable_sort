@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make stable_sort
+sudo ./app_stable_sort
