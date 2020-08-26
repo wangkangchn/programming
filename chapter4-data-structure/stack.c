@@ -23,8 +23,8 @@ int pop(void);
 
 int main(int argc, char *argv[])
 {
-    int a = 0, b = 0;
     char s[100];
+    int a,b;
     initialize(1000);
 
     while (scanf("%s", s) != EOF) { /* linux 中 scanf 是自己抛弃换行啊 */
@@ -35,16 +35,17 @@ int main(int argc, char *argv[])
             break;
         
         case '-':
+            a = pop();
             b = pop();
-            a = pop(); 
-            push(a - b);
+            printf("%d\n", b-a);
+            push(b-a);
             break;
         
         case '*':
             push(pop() * pop());
             break;
 
-        case '\n':
+        case '#':
             goto lab_ret;
             break;
 
@@ -67,7 +68,7 @@ lab_ret:
  */
 inline int initialize(int max)
 {
-    top = 0;
+    top = -1;
     MAX = max;
     S = calloc(1, MAX);
     if (S)
@@ -79,7 +80,7 @@ inline int initialize(int max)
  * is_empty - 判断栈是否为空
  * @return: 空返回1, 非空返回0
  */
-inline int is_empty(void) { return top == 0; }
+inline int is_empty(void) { return top < 0; }
 
 /**
  * is_full - 判断栈是否为满

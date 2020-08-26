@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make linear_search
+sudo ./app_linear_search

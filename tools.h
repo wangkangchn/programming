@@ -27,8 +27,18 @@ Copyright © wkangk <wangkangchn@163.com>
     #endif
 /* ================================================================== */
 
-
 int swap(int A[], int num, int i, int j);
-void trace(int A[], int num);
+
+/**
+ * trace - 按顺序输出数组元素
+ * @A:      待排序数组	
+ * @num:    数组元素个数
+ */
+#define trace(A, num) ({    \
+    for (int i = 0; i < num; ++i) { \
+        if (i > 0) printf(" ");     \
+        printf("%d", A[i]);         \
+    }                               \
+    printf("\n");})
 
 #endif // !__TYPES_H__

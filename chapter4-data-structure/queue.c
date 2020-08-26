@@ -13,6 +13,7 @@ Copyright © wkangk <wangkangchn@163.com>
 
 #include "my_queue.h"
 
+
 const int MAX_LENGTH = 100;
 
 int main(int argc, char *argv[])
