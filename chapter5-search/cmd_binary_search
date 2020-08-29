@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make binary_search
+sudo ./app_binary_search
