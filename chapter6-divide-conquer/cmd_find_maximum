@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make find_maximum
+sudo ./app_find_maximum

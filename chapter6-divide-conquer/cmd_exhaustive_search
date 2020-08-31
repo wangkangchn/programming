@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make exhaustive_search
+sudo ./app_exhaustive_search
