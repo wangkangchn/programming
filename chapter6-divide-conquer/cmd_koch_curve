@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make koch_curve
+sudo ./app_koch_curve

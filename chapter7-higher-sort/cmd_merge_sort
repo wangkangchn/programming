@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make merge_sort
+sudo ./app_merge_sort
