@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make partition
+sudo ./app_partition
