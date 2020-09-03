@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make rooted_tree
+sudo ./app_rooted_tree

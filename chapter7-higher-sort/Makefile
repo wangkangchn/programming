@@ -1,5 +1,8 @@
 CC = gcc -g
 
+the_num_of_inversions:
+	${CC} the_num_of_inversions.c -o app_the_num_of_inversions
+
 counting_sort:
 	${CC} counting_sort.c -o app_counting_sort
 
