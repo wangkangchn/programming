@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make binary_tree
+sudo ./app_binary_tree
