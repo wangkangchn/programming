@@ -8,7 +8,6 @@ Copyright © wkangk <wangkangchn@163.com>
 ***************************************************************/
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include "../tools/tools.h"
 #include "../tools/log.h"
 
@@ -270,6 +269,6 @@ int main(int argc, char *argv[])
 
     free_buf(tree);
 
-    printf( "%f seconds\n", FINISH(start));
+    FINISH(start);
     return 0;
 }

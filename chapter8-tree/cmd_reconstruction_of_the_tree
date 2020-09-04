@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make reconstruction_of_the_tree
+sudo ./app_reconstruction_of_the_tree

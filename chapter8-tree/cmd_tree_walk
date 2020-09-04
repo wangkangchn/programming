@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make tree_walk
+sudo ./app_tree_walk
