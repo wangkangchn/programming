@@ -7,8 +7,12 @@ Copyright © wkangk <wangkangchn@163.com>
 时间	   	: 2020-09-04 10:18
 ***************************************************************/
 #include <stdio.h>
+#include <assert.h>
 #include "../tools/tools.h"
 #include "../tools/log.h"
+#include "../tools/queue.h"
+
+DEFINE_ELEMENT_TYPE(int, queue);
 
 typedef struct 
 {
@@ -23,62 +27,66 @@ enum TraversalType
     POST_ORDER = 2,  
 };
 
-/**
- * binary_search - 二分查找
- * @S:      待查找数列
- * @num:	S的大小
- * @key:    待查找的键
- * @return: 成功返回0, 失败返回-1
- */
-int binary_search(int *S, int num, int key)
-{   
-    /* 递归结束条件 */
-    if (num != 0) {
-        int middle = num / 2;
 
-        if (S[middle] == key) 
-            return 1;     
-        /* 右侧递归搜索 */
-        else if (S[middle] < key) 
-            return binary_search(S + middle + 1, num - middle, key);
-        /* 左侧递归搜索 */
-        else 
-            return binary_search(S, middle, key);      
-    } else 
-        return 0;
+/**
+ * search - 线性搜索(带标记)
+ * @A:	    待搜索数组
+ * @num:    A的个数
+ * @key:    欲搜索的键值
+ * @return: 搜索到key返回索引, 否则返回-1
+ */
+int search(int A[], int left, int right, int key)
+{   
+    int i, num = right - left;
+    A += left;
+    for (i = 0; i < num; ++i) {
+        if (A[i] != key)
+            continue;
+        break;
+    }
+    return i != num ? i : -1;
 }
 
-/* binary_search(S, n, key);  */
 /**
  * reconstruct - 依据前序和中序遍历结果重建树
- * @in:	
- * @left:   左闭
- * @right:  右开
- * @return: 成功返回0, 失败返回-1
+ * @tree:	    树
+ * @Q:          当前前序遍历队列
+ * @in_order:   中序遍历序列
+ * @left:       中序遍历序列左边界(闭)
+ * @right:      中序遍历序列右边界(开)
+ * @return:     欲建立子树的根节点与当前中序遍历序列匹配, 当前欲建立子树的根节点的索引
+ *              否则返回-1
  */
-void reconstruct(Node *tree, int *pre, int id, int n, int *in, int left, int right)
+int reconstruct(Node *tree, queue *Q, int *in_order, int left, int right)
 {   
-    int index;
-    /* 递归结束条件 */
-    if (left < right || id < n) {
-        /* 根节点 */
-        if (id == 0)
-            (tree + id)->parent = -1;
-        else {
-            if (tree[tree[id].parent].left == 0)
-                tree[tree[id].parent].left = id;
-            else
-                tree[tree[id].parent].right = id;
-        }
-        
-        /* 在中序结果中搜索 id */
-        index = binary_search(in + left, right - left, id);
+    /* 递归退出条件 */
+    if (is_empty(Q) || (left >= right))
+        return -1;
+    pr_debug("Q: %d 搜索范围 left: %d right: %d\n", front(Q), left, right);
+    /* 先搜索在当前 中序遍历序列 中有没有当前 前序遍历队列 的第一个节点, 
+如果有, 说明当前 前序遍历队列的第一个节点为当前 中序遍历序列 的根节点, 则从index处划分in_order,
+    确定该根节点的左右子节点(这里就是递归调用了). 返回当前前序遍历队列的头结点
+如果没有, 则说明当前 前序遍历队列的第一个节点不是当前 中序遍历序列 的根节点则 返回-1.*/    
+    int root;
+    int index = search(in_order, left, right, front(Q));
+    pr_debug("index: %d\n", index);
+    if (index >= 0) {
+        index += left;
 
-        reconstruct(tree, pre, id + 1, n,  in, left, index);
-        reconstruct(tree, pre, id + 1, n,  in, index + 1, right);
-    }
+        root = pop(Q);
+        /* 递归搜索左右子树 */
+        pr_debug("搜搜 %d 左子树: left: %d right: %d\n", root, left, index);
+        (tree + root)->left = reconstruct(tree, Q, in_order, left, index);
+        pr_debug("搜搜 %d 右子树: left: %d right: %d\n", root, index, right);
+        (tree + root)->right = reconstruct(tree, Q, in_order, index + 1, right);
+        pr_info("root: %d left: %d right: %d\n", root, (tree + root)->left, (tree + root)->right);
+
+        printf("%d ", root);    /* 左 右 根 在这里输出的就是后续, 因为建立树是要先递归到树底, 所以递归返回的顺序就是
+                                使用遍历算法遍历的顺序!!! */
+        return root;
+    } else
+        return -1;
 }
-
 
 /**
  * traversal - 遍历树(先根法)
@@ -94,7 +102,7 @@ void traversal(Node *tree, int id, int father, enum TraversalType type, void (*o
     Node *node = tree + id;
 
     /* 1. 递归退出条件 */
-    if (id == 0) 
+    if (id == -1) 
         return;
 
     if (type == PRE_ORDER) 
@@ -121,41 +129,48 @@ void show(Node *tree, int id, int father)
     printf("%d ", id);
 }
 
+/* 测试:
+5
+1 2 3 4 5
+3 2 4 1 5 
 
+9
+1 2 3 4 5 6 7 8 9
+3 2 5 4 6 1 8 7 9*/
 const int MAX = 100;
 int main(int argc, char *argv[])
 {
-    SET_DEFAULT_LEVEL(CONSOLE_LOGLEVEL_INFO);
-    int n, i, j;
-    int id, degree;
-    int child[2];
-    
+    SET_DEFAULT_LEVEL(CONSOLE_LOGLEVEL_ERR);
+    int n, i;
+
     scanf("%d", &n);
+    /* 保存前序遍历序列 */
+    queue *Q = calloc_buf(1, queue);
+    assert(init(Q, n));
 
-    Node *tree = calloc_buf(n, Node);
+    Node *tree = calloc_buf(n + 1, Node);
+    int in_order[n];
+    int pre;        /* 前序序列元素 */
     
-        for (i = 0; i < n; i++) {
-        scanf("%d", &id);
-        degree = 0;
-        for (j = 0; j < 2; ++j) {
-            scanf("%d", child + j);
-            if (child[j] != -1)
-                ++degree;
-        }
-        insert(tree, id, degree, child);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &pre);
+        push(Q, pre);
     }
-    double start = START();
-    
-    printf("Preorder\n");
-    traversal(tree, 0, -1, PRE_ORDER, show);
-    printf("\nInorder\n");
-    traversal(tree, 0, -1, IN_ORDER, show);
-    printf("\nPostorder\n");
-    traversal(tree, 0, -1, POST_ORDER, show);
-    printf("\n");
-    clearup(tree);
-    free_buf(tree);
 
+    for (i = 0; i < n; i++) 
+        scanf("%d", in_order + i);
+
+    double start = START();
+    printf("后续遍历\n");
+    reconstruct(tree, Q, in_order, 0, n);
+    
+    // traversal(tree, 0+1, -1, POST_ORDER, show);
+
+    printf("\n");
+
+    free_buf(tree);
+    clear(Q);
+    free_buf(Q);
     FINISH(start);
     return 0;
 }
