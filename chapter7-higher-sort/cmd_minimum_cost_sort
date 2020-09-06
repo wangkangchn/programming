@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make minimum_cost_sort
+sudo ./app_minimum_cost_sort

@@ -1,5 +1,8 @@
 CC = gcc -g
 
+minimum_cost_sort:
+	${CC} minimum_cost_sort.c -o app_minimum_cost_sort
+
 the_num_of_inversions:
 	${CC} the_num_of_inversions.c -o app_the_num_of_inversions
 
