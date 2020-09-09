@@ -1,5 +1,8 @@
 CC = gcc -g
 
+priority_queue:
+	${CC} priority_queue.c -o app_priority_queue
+
 maximun_heap:
 	${CC} maximun_heap.c -o app_maximun_heap
 

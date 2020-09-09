@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make priority_queue
+sudo ./app_priority_queue
