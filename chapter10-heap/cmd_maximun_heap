@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make maximun_heap
+sudo ./app_maximun_heap

@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make balance_binary_search_tree
+sudo ./app_balance_binary_search_tree
