@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make longest_common_subsequence
+sudo ./app_longest_common_subsequence

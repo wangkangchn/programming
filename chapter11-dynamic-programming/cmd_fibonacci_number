@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make fibonacci_number
+sudo ./app_fibonacci_number
