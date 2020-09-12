@@ -118,19 +118,24 @@ int main(int argc, char *argv[])
 
     heap_element key;
 
+    double start = START();
     for (; ;) {
         scanf("%s", cmd);
         /* 插入树根, 而后向下调整 */
         if (strcmp(cmd, "insert") == 0) {
             scanf("%d", &key);
             insert(&H, key);
+
+
         /* 删除, 将最后一个节点键值上提到树根, 而后向下调整 */
         } else if (strcmp(cmd, "extract") == 0) {
-            printf("%d\n", delete(&H));
+             printf("%d\n", delete(&H));
+
         } else {
             free_buf(H.heap);
             break;
         }
     }
+    FINISH(start);
     return 0;
 }

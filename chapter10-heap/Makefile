@@ -1,5 +1,8 @@
 CC = gcc -g
 
+priority_queue_while.c:
+	${CC} priority_queue_while.c.c -o app_priority_queue_while.c
+
 priority_queue:
 	${CC} priority_queue.c -o app_priority_queue
 
