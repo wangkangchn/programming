@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make matrix_chain_multiplication
+sudo ./app_matrix_chain_multiplication
