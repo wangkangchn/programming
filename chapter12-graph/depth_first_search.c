@@ -141,7 +141,7 @@ const int MAX = 100;
 
 int main(int argc, char *argv[])
 {
-    // SET_DEFAULT_LEVEL(CONSOLE_LOGLEVEL_INFO);
+    SET_DEFAULT_LEVEL(CONSOLE_LOGLEVEL_INFO);
     int n = 0, i, u, k, j;
     int vertex;
     adj_node *node;
@@ -164,16 +164,13 @@ int main(int argc, char *argv[])
             printf("%d ", node->id);
         
         printf("\n");
-
-
     }
 
     double start = START();
-    
-    FINISH(start);
     depth_first_search(G, 1);
     show(G, n+1);
     clear_G(G, n+1);
     free_buf(G);
+    FINISH(start);
     return 0;
 }
