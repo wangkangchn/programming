@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make depth_first_search
+sudo ./app_depth_first_search
