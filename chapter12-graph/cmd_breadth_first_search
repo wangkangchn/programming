@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make breadth_first_search
+sudo ./app_breadth_first_search
