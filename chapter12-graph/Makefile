@@ -1,5 +1,8 @@
 CC = gcc -g
 
+connected_components:
+	${CC} connected_components.c -o app_connected_components
+
 breadth_first_search:
 	${CC} breadth_first_search.c -o app_breadth_first_search
 
