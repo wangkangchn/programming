@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make test_2D
+sudo ./app_test_2D

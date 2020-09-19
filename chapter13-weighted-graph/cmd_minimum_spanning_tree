@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make minimum_spanning_tree
+sudo ./app_minimum_spanning_tree
