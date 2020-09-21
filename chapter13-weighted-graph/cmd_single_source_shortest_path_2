@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make single_source_shortest_path_2
+sudo ./app_single_source_shortest_path_2

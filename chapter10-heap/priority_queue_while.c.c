@@ -48,7 +48,7 @@ extract
 extract
 end
 
-extract 
+
 insert 10
 extract 
 insert 11
@@ -85,19 +85,10 @@ int main(int argc, char *argv[])
         if (strcmp(cmd, "insert") == 0) {
             scanf("%d", &key);
             pqpush(Q, key);
-
-            // printf("\n%d 插入后: \n", key);
-            // for (size_t i = 1; i <= Q->count; i++)
-            //     printf("%d ", Q->heap[i]);
-            // printf("\n\n");
             
-
         /* 删除, 将最后一个节点键值上提到树根, 而后向下调整 */
         } else if (strcmp(cmd, "extract") == 0) {
             printf("%d\n", pqpop(Q));
-            // for (size_t i = 1; i <= Q->count; i++)
-            //     printf("%d ", Q->heap[i]);
-            // printf("\n\n");
             
         } else {
             pqclear(Q);
