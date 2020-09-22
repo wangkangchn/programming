@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make floyd
+sudo ./app_floyd

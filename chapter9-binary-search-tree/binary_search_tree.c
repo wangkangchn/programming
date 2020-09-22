@@ -50,7 +50,6 @@ void insert(Node **tree, int key)
     /* 来到所需的叶节点, 插入 */
     if (*tree == NULL) {
         *tree = calloc_node(key);
-        // (*tree)->parent = parent;
         return;
     }
 

@@ -1,5 +1,8 @@
 CC = gcc -g
 
+floyd:
+	${CC} floyd.c -o app_floyd
+
 single_source_shortest_path_2:
 	${CC} single_source_shortest_path_2.c -o app_single_source_shortest_path_2
 
