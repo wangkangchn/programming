@@ -32,7 +32,7 @@ enum TraversalType
     POST_ORDER = 2,  
 };
 
-typedef struct Node {
+typedef struct bstree_node {
     struct Node *left;
     struct Node *right;
 

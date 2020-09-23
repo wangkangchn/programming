@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make range_search
+sudo ./app_range_search
