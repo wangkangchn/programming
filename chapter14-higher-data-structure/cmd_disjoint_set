@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make disjoint_set
+sudo ./app_disjoint_set
