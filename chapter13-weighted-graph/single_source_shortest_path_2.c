@@ -251,6 +251,13 @@ void dijkstra1(Vertex *G, size_t n, int s, int *d, int *p)
 3 4 2 1 0 1 1 4 4 3
 4 2 2 1 3 3
 
+5
+0 3 2 -3 3 -1 1 -2
+1 2 0 -2 3 -4
+2 3 0 -3 3 -1 4 -1
+3 4 2 -1 0 -1 1 -4 4 -3
+4 2 2 -1 3 -3
+
  */
 
 int main(int argc, char *argv[])
@@ -291,10 +298,25 @@ int main(int argc, char *argv[])
     
     printf("普通实现: \n");
     start = START();
-    dijkstra(G, n, 0, d, p);
+    dijkstra1(G, n, 0, d, p);
     
     for (i = 0; i < n; ++i)
         printf("%d %d\n", i, d[i]);
+    FINISH(start);
+
+
+    printf("所有点对间的最短路径\n");
+    start = START();
+
+    for (i = 0; i < n; ++i) {
+        memset(d, 0, n * sizeof(n));
+        memset(p, 0, n * sizeof(n));
+        dijkstra(G, n, i, d, p);
+        for (j = 0; j < n; ++j)
+            printf("%d ", d[j]);
+        printf("\n");
+    }
+
     FINISH(start);
 
     clear_G(G, n);

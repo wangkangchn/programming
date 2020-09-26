@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make all_pairs_shortest_path
+sudo ./app_all_pairs_shortest_path
