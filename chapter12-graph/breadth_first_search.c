@@ -71,7 +71,6 @@ void breadth_first_search(Vertex *G, int id)
     free_buf(Q);
 }
 
-
 /**
  * insert - 向邻接表中插入节点(尾插法, 保证小的序号在前)
  * @G:      邻接表
@@ -185,7 +184,7 @@ int main(int argc, char *argv[])
 
     double start = START();
 
-    breadth_first_search(G, 1);
+    bfs(G, 1);
     show(G, n+1);
     clear_G(G, n+1);
     free_buf(G);
