@@ -1,5 +1,8 @@
 CC = gcc -g
 
+ariticulation_point:
+	${CC} ariticulation_point.c -o app_ariticulation_point
+
 graph:
 	${CC} graph.c -o app_graph
 

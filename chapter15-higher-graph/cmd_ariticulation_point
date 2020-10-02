@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make ariticulation_point
+sudo ./app_ariticulation_point
