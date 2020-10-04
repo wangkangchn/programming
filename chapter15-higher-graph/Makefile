@@ -1,5 +1,11 @@
 CC = gcc -g
 
+minimun_spanning_tree:
+	${CC} minimun_spanning_tree.c -o app_minimun_spanning_tree
+
+diameter_of_a_tree:
+	${CC} diameter_of_a_tree.c -o app_diameter_of_a_tree
+
 ariticulation_point:
 	${CC} ariticulation_point.c -o app_ariticulation_point
 

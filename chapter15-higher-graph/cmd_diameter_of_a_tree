@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make diameter_of_a_tree
+sudo ./app_diameter_of_a_tree

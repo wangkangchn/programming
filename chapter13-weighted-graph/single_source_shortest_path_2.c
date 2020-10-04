@@ -311,7 +311,7 @@ int main(int argc, char *argv[])
     for (i = 0; i < n; ++i) {
         memset(d, 0, n * sizeof(n));
         memset(p, 0, n * sizeof(n));
-        dijkstra(G, n, i, d, p);
+        dijkstra1(G, n, i, d, p);
         for (j = 0; j < n; ++j)
             printf("%d ", d[j]);
         printf("\n");
