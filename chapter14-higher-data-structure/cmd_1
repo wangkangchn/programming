@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make 1
+sudo ./app_1

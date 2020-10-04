@@ -45,7 +45,6 @@ int find_set(int *set, int x)
     return parent;
 }
 
-
 /**
  * link - 合并两个集合, 将较低的树合并到较高的树中
  * @set:    所有的集合
@@ -76,7 +75,7 @@ void link(int *set, int *rank, int x, int y)
  * @y:	    待合并元素
  * @return: 无
  */
-void unite(int *set, int *rank, int x, int y)
+inline void unite(int *set, int *rank, int x, int y)
 {
     link(set, rank, find_set(set, x), find_set(set, y));
 }
@@ -88,7 +87,7 @@ void unite(int *set, int *rank, int x, int y)
  * @y:	    带判断元素
  * @return: 同一集合返回 true, 否则返回 false
  */
-bool same(int *set, int x, int y)
+inline bool same(int *set, int x, int y)
 {
     return find_set(set, x) == find_set(set, y);
 }

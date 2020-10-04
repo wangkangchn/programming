@@ -1,5 +1,8 @@
 CC = gcc -g
 
+1:
+	${CC} 1.c -o app_1
+
 range_search:
 	${CC} range_search.c -o app_range_search
 
