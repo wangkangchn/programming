@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make parallel_orthogonal
+sudo ./app_parallel_orthogonal
