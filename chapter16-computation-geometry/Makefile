@@ -1,5 +1,11 @@
 CC = gcc -g
 
+cross_point_of_a_circle_and_a_line:
+	${CC} cross_point_of_a_circle_and_a_line.c -o app_cross_point_of_a_circle_and_a_line -lm
+
+cross_point:
+	${CC} cross_point.c -o app_cross_point
+
 counter_clockwise:
 	${CC} counter_clockwise.c -o app_counter_clockwise -lm
 
