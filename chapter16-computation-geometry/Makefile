@@ -1,5 +1,8 @@
 CC = gcc -g
 
+cross_points_of_circles:
+	${CC} cross_points_of_circles.c -o app_cross_points_of_circles -lm
+
 cross_point_of_a_circle_and_a_line:
 	${CC} cross_point_of_a_circle_and_a_line.c -o app_cross_point_of_a_circle_and_a_line -lm
 

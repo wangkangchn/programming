@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make cross_points_of_circles
+sudo ./app_cross_points_of_circles
