@@ -1,5 +1,8 @@
 CC = gcc -g
 
+polygon_point_containment:
+	${CC} polygon_point_containment.c -o app_polygon_point_containment -lm
+
 cross_points_of_circles:
 	${CC} cross_points_of_circles.c -o app_cross_points_of_circles -lm
 
