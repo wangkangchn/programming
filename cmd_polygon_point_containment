@@ -1,4 +1,0 @@
-
-sudo make clean
-sudo make polygon_point_containment
-sudo ./app_polygon_point_containment

@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make convex_hull
+sudo ./app_convex_hull

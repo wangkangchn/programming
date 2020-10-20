@@ -1,5 +1,8 @@
 CC = gcc -g
 
+convex_hull:
+	${CC} convex_hull.c -o app_convex_hull -lm
+
 polygon_point_containment:
 	${CC} polygon_point_containment.c -o app_polygon_point_containment -lm
 
