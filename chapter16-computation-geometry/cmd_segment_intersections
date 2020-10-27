@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make segment_intersections
+sudo ./app_segment_intersections

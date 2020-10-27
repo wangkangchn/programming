@@ -8,138 +8,37 @@ Copyright © wkangk <wangkangchn@163.com>
 ***************************************************************/
 #include <stdio.h>
 #include <stdbool.h>
+#include <math.h>
 #include "../tools/tools.h"
 #include "../tools/log.h"
 #include "../tools/list.h"
+#include "../tools/bstree.h"
 
-typedef int (*__compare_fn)(const void *, const void *);
+DEFINE_BSTREE_ELEMENT_TYPE(double, bstree_node, bstree);
 
+// int compare(const void *arg1, const void *arg2)
+// {
+//     int ret = 0;
+//     int __arg1 = *(int *)arg1;
+//     int __arg2 = *(int *)arg2;
+
+//     if (__arg1 < __arg2) ret = -1;
+//     else if (__arg1 > __arg2) ret = 1;
+
+//     return ret;
+// }
 int compare(const void *arg1, const void *arg2)
 {
     int ret = 0;
-    int __arg1 = *(int *)arg1;
-    int __arg2 = *(int *)arg2;
+    double __arg1 = *(double *)arg1;
+    double __arg2 = *(double *)arg2;
 
-    if (__arg1 < __arg2) ret = -1;
-    else if (__arg1 > __arg2) ret = 1;
+    if (fabs(__arg1 - __arg2) < 1e-8) ret = 0;
+    else if (__arg1 < __arg2)   ret = -1;
+    else                        ret = 1;
 
     return ret;
 }
-
-enum TraversalType     
-{   PRE_ORDER = 0,    
-    IN_ORDER = 1,  
-    POST_ORDER = 2,  
-};
-
-typedef struct bstree_node {
-    struct Node *left;
-    struct Node *right;
-
-    int *data;
-} bstree_node;
-
-typedef struct bstree {
-    bstree_node *root;
-    __compare_fn __compare;
-} bstree;
-
-/**
- * calloc_node - 分配节点空间, 插入键值
- * @val:	待插入键值
- * @return: 新分配的节点指针
- */
-#define calloc_node(val)    ({              \
-    bstree_node *__node =  calloc_buf(1, bstree_node);    \
-    __node->data = calloc_buf(1, typeof( *__node->data ) ); \
-    *__node->data = *(val);                      \
-    __node;                                 \
-})
-
-/**
- * insert - 向二叉搜索树插入键值
- * @tree:   树(二级指针, 数指针的地址)
- * @key:    待插入键值	
- */
-#define insert(tree, val)   ({  \
-    typeof( (tree)->root ) *node = &( (tree)->root ); \
-    typeof( (tree)->root ) __temp = calloc_node( (val) );   \
-    while (*node != NULL)           \
-        if ( (tree)->__compare( __temp->data, (*node)->data ) <= 0 ) node = &(*node)->left; \
-        else node = &(*node)->right;                    \
-    (*node) = __temp;                         \
-})
-
-/**
- * find - 在二叉搜索树中搜索指定的键值
- * @tree:   树
- * @key:	待搜索的键值
- * @return: 找到成功返回true, 失败返回false
- */
-#define find(tree, val)     ({          \
-    bool __result = false;              \
-    typeof( (tree)->root ) __node = (tree)->root; \
-    while (true)    {                   \
-        if (__node == NULL)     break;  \
-        if      ( (tree)->__compare( (val), __node->data ) < 0 )     __node = __node->left;  \
-        else if ( (tree)->__compare( (val), __node->data ) > 0 )     __node = __node->right; \
-        else {  __result = true;    break;  }               \
-    }           \
-    __result;   \
-})
-
-
-/**
- * find_rightmost_key - 查找最右子树键值, 返回其上的键值, 而后删除该节点
- * @tree:   待搜索的子树	
- * @return: 最右子树的键值
- */
-#define find_rightmost_key(tree)    ({  \
-    int *__key;  \
-    typeof( (tree) ) __node_ = tree; \
-    typeof( *(tree) ) __temp;       \
-\
-    while (true)    {   \
-        if ((*__node_)->right) __node_ = &(*__node_)->right;   \
-        else {  \
-            __temp = *__node_;   \
-            __key = __temp->data;\
-            if (__temp->left)   *__node_ = __temp->left;  \
-            else                *__node_ = NULL;         \
-            free_buf(__temp);   \
-            break;              \
-        }   \
-    }   \
-    *__key;  \
-})
-
-
-/**
- * delete - 在二叉搜索树中删除指定节点
- * @tree:   树的地址
- * @key:	待删除的键值
- * @return: 无
- */
-#define delete(tree, val)   ({  \
-    typeof( (tree)->root ) *__node = &( (tree)->root ); \
-    typeof( *__node )   __temp;         \
-\
-    while ((*__node) != NULL)  {           \
-        if      ( (tree)->__compare( (val), (*__node)->data ) < 0 )     (__node) = &(*__node)->left;  \
-        else if ( (tree)->__compare( (val), (*__node)->data ) > 0 )     (__node) = &(*__node)->right; \
-        else {  \
-\
-            if ((*__node)->left && (*__node)->right)            *(*__node)->data = find_rightmost_key(&(*__node)->left);  \
-            else if (!((*__node)->left || (*__node)->right))    free_buf(*__node);                                      \
-            else {  \
-                __temp = *__node;   \
-                if ((*__node)->left)    (*__node) = (*__node)->left;        \
-                else                    (*__node) = (*__node)->right;       \
-                free_buf(__temp);   \
-            }   \
-        }   \
-    }   \
-})
 
 /**
  * traversal - 遍历树(先根法)
@@ -176,7 +75,7 @@ void traversal(bstree_node *tree, enum TraversalType type, void (*op)(bstree_nod
  * @node:   节点
  * @return: 无
  */
-static inline void show(bstree_node *node) { printf("%d ", *node->data); }
+static inline void show(bstree_node *node) { printf("%lf ", *node->data); }
 
 /* 测试:
 18
@@ -207,6 +106,7 @@ int main(int argc, char *argv[])
     int n = 0, i;
     int A[MAX];
     int key;
+    double _key;
     char cmd[20];
     
     bstree tree = {
@@ -223,17 +123,20 @@ int main(int argc, char *argv[])
         {
         case 'i':
             scanf("%d", &key);
-            insert(&tree, &key);
+            _key = (double)key;
+            insert(&tree, &_key);
             break;
         
         case 'f':
             scanf("%d", &key);
-            printf("%s\n", find(&tree, &key) ? "yes" : "no");
+            _key = (double)key;
+            printf("%s\n", find(&tree, &_key) ? "yes" : "no");
             break;
 
         case 'd':
             scanf("%d", &key);
-            delete(&tree, &key);
+            _key = (double)key;
+            delete(&tree, &_key);
             break;
         
         case 'p':
@@ -248,8 +151,5 @@ int main(int argc, char *argv[])
         }
     }
 
-    // double start = START();
-    
-    // FINISH(start);
     return 0;
 }

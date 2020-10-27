@@ -1,5 +1,8 @@
 CC = gcc -g
 
+segment_intersections:
+	${CC} segment_intersections.c -o app_segment_intersections
+
 convex_hull:
 	${CC} convex_hull.c -o app_convex_hull -lm
 
