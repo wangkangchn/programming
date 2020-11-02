@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make is_prime
+sudo ./app_is_prime

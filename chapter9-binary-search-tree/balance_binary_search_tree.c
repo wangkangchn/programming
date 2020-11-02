@@ -137,7 +137,7 @@ int main(int argc, char *argv[])
         {
         case 'i':
             scanf("%d", &key);
-            insert(&tree, NULL, key);
+            insert(&tree, -1, key);
             break;
         
         // case 'f':

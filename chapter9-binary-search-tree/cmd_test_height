@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make test_height
+sudo ./app_test_height
