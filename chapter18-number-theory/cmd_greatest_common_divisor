@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make greatest_common_divisor
+sudo ./app_greatest_common_divisor

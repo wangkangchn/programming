@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make power
+sudo ./app_power
