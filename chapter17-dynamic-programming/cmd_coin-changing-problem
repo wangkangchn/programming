@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make coin-changing-problem
+sudo ./app_coin-changing-problem
