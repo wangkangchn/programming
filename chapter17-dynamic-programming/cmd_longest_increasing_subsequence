@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make longest_increasing_subsequence
+sudo ./app_longest_increasing_subsequence
