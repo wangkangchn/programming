@@ -1,5 +1,8 @@
 CC = gcc -g
 
+largest_square:
+	${CC} largest_square.c -o app_largest_square
+
 longest_increasing_subsequence:
 	${CC} longest_increasing_subsequence.c -o app_longest_increasing_subsequence
 

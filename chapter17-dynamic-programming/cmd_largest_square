@@ -1,0 +1,4 @@
+
+sudo make clean
+sudo make largest_square
+sudo ./app_largest_square
